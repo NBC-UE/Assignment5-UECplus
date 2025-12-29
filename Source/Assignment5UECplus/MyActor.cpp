@@ -17,7 +17,7 @@ void AMyActor::Turn(const FRotator& DeltaRotation)
 
 void AMyActor::Move(const FVector& DeltaMove)
 {
-	AccumulatedMoveDistance += DeltaMove;
+	AccumulatedMoveDistance += DeltaMove.Size();
 	AddActorLocalOffset(DeltaMove);
 }
 
@@ -35,7 +35,7 @@ void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
 	RandomEventCount = 0;
-	AccumulatedMoveDistance = FVector::ZeroVector;
+	AccumulatedMoveDistance = 0.0f;
 	
 	for (int i = 0; i < 10; i++)
 	{
@@ -55,9 +55,9 @@ void AMyActor::BeginPlay()
 		}
 	}
 	
-	FString ResultString = FString::Printf(TEXT("총 이벤트 발생 횟수: %d, 총 이동 거리: %s"), RandomEventCount, *AccumulatedMoveDistance.ToString());
+	FString ResultString = FString::Printf(TEXT("총 이벤트 발생 횟수: %d, 총 이동 거리: %f"), RandomEventCount, AccumulatedMoveDistance);
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, ResultString);
-	AccumulatedMoveDistance = FVector::ZeroVector;
+	AccumulatedMoveDistance = 0.0f;
 }
 
 void AMyActor::RandomTurnAndMove()

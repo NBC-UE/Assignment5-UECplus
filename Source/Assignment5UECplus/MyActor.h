@@ -30,5 +30,5 @@ private:
 	float MoveRange = 5.0f;
 
 	int32 RandomEventCount = 0;
-	FVector AccumulatedMoveDistance = FVector::ZeroVector;
+	float AccumulatedMoveDistance = 0.0f;
 };
